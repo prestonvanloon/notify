@@ -36,6 +36,13 @@ func splitflags(set uint32) (e []uint32) {
 	return
 }
 
+func newStream(s string, cb func([]FSEvent)) *stream { return &stream{} }
+
+type stream struct{}
+
+func (*stream) Stop()        {}
+func (*stream) Start() error { return nil }
+
 // watch represents a filesystem watchpoint. It is a higher level abstraction
 // over FSEvents' stream, which implements filtering of file events based
 // on path and event set. It emulates non-recursive watch-point by filtering out
